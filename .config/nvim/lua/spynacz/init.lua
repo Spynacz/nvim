@@ -101,7 +101,7 @@ require("lazy").setup({
         opts = {},
     },
 
-    { 'roobert/hoversplit.nvim' },
+    -- { 'roobert/hoversplit.nvim' },
 
     { 'mrjones2014/smart-splits.nvim', build = './kitty/install-kittens.bash' },
 
