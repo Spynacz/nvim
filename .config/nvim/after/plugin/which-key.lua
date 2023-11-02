@@ -3,10 +3,12 @@ local wk = require("which-key")
 wk.register({
     f = {
         name = "File search",
-        f = "Find files",
         g = "Git files",
         s = "Grep search",
+        l = "Live grep",
+        b = "File browser",
     },
+    o = "Find files",
     g = {
         name = "Git",
         s = "Git status",
@@ -25,6 +27,7 @@ wk.register({
         },
         f = "Format file"
     },
+    h = "Signature help",
     u = "Show undotree",
     p = {
         name = "File explorer",
@@ -36,6 +39,13 @@ wk.register({
         name = "Trouble",
         x = "Trouble",
         q = "Trouble quickfix"
+    },
+    ["<space>"] = {
+        name = "Swap split",
+        h = "Swap split left",
+        j = "Swap split down",
+        k = "Swap split up",
+        l = "Swap split right",
     }
 }, { prefix = "<leader>", mode = "n" })
 
