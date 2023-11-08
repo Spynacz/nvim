@@ -52,7 +52,7 @@ require("lazy").setup({
 
             -- Custom
             {'mfussenegger/nvim-jdtls'},
-            {'jose-elias-alvarez/null-ls.nvim'},
+            {'nvimtools/none-ls.nvim'},
 
             -- Autocompletion
             {'hrsh7th/nvim-cmp'},     -- Required
