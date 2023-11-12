@@ -49,6 +49,10 @@ wk.register({
     }
 }, { prefix = "<leader>", mode = "n" })
 
+wk.register({
+    gd = "Go to definition",
+    gD = "Go to declaration",
+})
 
 wk.register({
     p = "Paste over and keep clipboard"
