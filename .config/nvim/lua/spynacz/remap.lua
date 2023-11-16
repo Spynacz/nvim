@@ -40,3 +40,4 @@ vim.keymap.set('','<Up>',function() return vcountfunc('k') end,opts)
 
 vim.keymap.set("i", "<Down>", "<C-o>gj")
 vim.keymap.set("i", "<Up>", "<C-o>gk")
+

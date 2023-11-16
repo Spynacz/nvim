@@ -23,7 +23,13 @@ vim.diagnostic.config({
 
 lsp_zero.setup()
 
-require('mason').setup({})
+require('mason').setup({
+    ui = {
+        keymaps = {
+            apply_language_filter = "F",
+        }
+    }
+})
 require('mason-lspconfig').setup({
     ensure_installed = {
         'clangd',
@@ -62,11 +68,13 @@ cmp.setup({
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-        ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+        ['<C-l>'] = cmp_action.luasnip_jump_forward(),
+        ['<C-h>'] = cmp_action.luasnip_jump_backward(),
         ['<Tab>'] = cmp_action.luasnip_supertab(),
         ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        ['<C-j>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
+        ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
     }),
 })
 
