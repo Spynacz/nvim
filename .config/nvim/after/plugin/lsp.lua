@@ -87,5 +87,6 @@ null_ls.setup({
         null_ls.builtins.formatting.clang_format.with({
             disabled_filetypes = { 'java' },
         }),
+        null_ls.builtins.formatting.djlint,
     },
 })

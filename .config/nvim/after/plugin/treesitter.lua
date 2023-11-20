@@ -29,5 +29,8 @@ require 'nvim-treesitter.configs'.setup {
         scope_incremental = '<C-s>',
         node_decremental = '<C-S-space>',
     }
+  },
+  autotag = {
+      enable = true,
   }
 }

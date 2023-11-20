@@ -83,6 +83,9 @@ require("lazy").setup({
         build = function()
             require('nvim-treesitter.install').update({ with_sync = true })()
         end,
+        dependencies = {
+            {'windwp/nvim-ts-autotag'}
+        }
     },
 
     { 'folke/trouble.nvim',
