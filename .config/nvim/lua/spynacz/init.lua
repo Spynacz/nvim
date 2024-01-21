@@ -106,11 +106,16 @@ require("lazy").setup({
 
     -- { 'roobert/hoversplit.nvim' },
 
-    { 'mrjones2014/smart-splits.nvim', build = './kitty/install-kittens.bash' },
+    { 'mrjones2014/smart-splits.nvim',
+        build = './kitty/install-kittens.bash' },
 
     { 'folke/zen-mode.nvim' },
 
     { 'onsails/lspkind.nvim' },
+
+    { 'rcarriga/nvim-dap-ui',
+        dependencies = { 'mfussenegger/nvim-dap',
+            'ChristianChiarulli/neovim-codicons' } },
 })
 
 -- setup must be called before loading

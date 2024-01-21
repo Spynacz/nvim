@@ -32,3 +32,5 @@ vim.opt.smartcase = true
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+-- vim.opt.autochdir = true

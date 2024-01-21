@@ -42,7 +42,11 @@ local function get_jdtls_paths()
     path.platform_config = jdtls_install .. '/config_win'
   end
 
-  path.bundles = {}
+  path.bundles = {
+      vim.fn.glob('/home/mateusz/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/*.jar'),
+      '\n',
+      vim.fn.glob('/home/mateusz/.local/share/nvim/mason/packages/java-test/extension/server/*.jar'),
+  }
 
   ---
   -- Include java-test bundle if present
@@ -86,14 +90,14 @@ local function get_jdtls_paths()
     -- https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
     --
     -- This example assume you are using sdkman: https://sdkman.io
-    -- {
-    --   name = 'JavaSE-17',
-    --   path = vim.fn.expand('~/.sdkman/candidates/java/17.0.6-tem'),
-    -- },
-    -- {
-    --   name = 'JavaSE-18',
-    --   path = vim.fn.expand('~/.sdkman/candidates/java/18.0.2-amzn'),
-    -- },
+    {
+      name = 'JavaSE-11',
+      path = vim.fn.expand('/usr/lib/jvm/java-11-openjdk/'),
+    },
+    {
+      name = 'JavaSE-17',
+      path = vim.fn.expand('/usr/lib/jvm/java-17-openjdk/'),
+    },
   }
 
   cache_vars.paths = path

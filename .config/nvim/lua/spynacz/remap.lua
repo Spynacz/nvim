@@ -41,3 +41,6 @@ vim.keymap.set('','<Up>',function() return vcountfunc('k') end,opts)
 vim.keymap.set("i", "<Down>", "<C-o>gj")
 vim.keymap.set("i", "<Up>", "<C-o>gk")
 
+-- Add empty lines before and after cursor line
+vim.keymap.set('n', '<S-CR>', "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
+vim.keymap.set('n', '<CR>', "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
