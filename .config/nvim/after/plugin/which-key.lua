@@ -20,11 +20,7 @@ wk.register({
         w = "List workspace symbols",
         d = "Show diagnostics",
         c = "Code action",
-        r = {
-            name = "References, rename",
-            r = "References",
-            n = "Rename",
-        },
+        r = "Rename",
         f = "Format file"
     },
     h = "Signature help",
