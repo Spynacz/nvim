@@ -22,6 +22,15 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
+require('lspconfig').tsserver.setup({
+    on_attach = function(client, bufnr)
+        local opts = { buffer = bufnr, remap = false }
+        vim.keymap.set("n", "<leader>i",
+            function() vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } }) end,
+            opts)
+    end
+})
+
 lsp_zero.setup()
 
 require('mason').setup({
@@ -89,5 +98,6 @@ null_ls.setup({
             disabled_filetypes = { 'java' },
         }),
         null_ls.builtins.formatting.djlint,
+        null_ls.builtins.formatting.prettierd,
     },
 })
