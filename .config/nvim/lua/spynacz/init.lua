@@ -115,7 +115,8 @@ require("lazy").setup({
 
     { 'rcarriga/nvim-dap-ui',
         dependencies = { 'mfussenegger/nvim-dap',
-            'ChristianChiarulli/neovim-codicons' } },
+            'ChristianChiarulli/neovim-codicons',
+            'nvim-neotest/nvim-nio' } },
 })
 
 -- setup must be called before loading
