@@ -62,7 +62,12 @@ local lspkind = require('lspkind')
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
+
 cmp.setup({
+    preselect = 'none',
+    completion = {
+        completeopt = 'menu,menuone,noinsert,noselect'
+    },
     sources = {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
@@ -70,6 +75,18 @@ cmp.setup({
         { name = 'path' },
         { name = 'nvim_lua' },
         { name = 'nvim_lsp_signature_help' },
+        {
+            name = 'html-css',
+            option = {
+                max_count = {},
+                enable_on = { 'html', 'javascript', 'typescriptreact' },
+                file_extensions = { "css", "sass", "less" }, -- set the local filetypes from which you want to derive classes
+                style_sheets = {
+                    -- example of remote styles, only css no js for now
+                    "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
+                }
+            }
+        },
     },
     formatting = {
         format = lspkind.cmp_format({
@@ -87,13 +104,13 @@ cmp.setup({
         ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
     }),
 })
+require('html-css'):setup()
 
 local null_ls = require('null-ls')
 
 null_ls.setup({
     sources = {
-        null_ls.builtins.formatting.blue,
-        null_ls.builtins.formatting.beautysh,
+        null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.clang_format.with({
             disabled_filetypes = { 'java' },
         }),
