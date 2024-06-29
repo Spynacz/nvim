@@ -14,6 +14,7 @@ lsp_zero.on_attach(function(client, bufnr)
     -- vim.keymap.set("n", "<leader>lrr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("n", "<leader>h", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
     vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 end)
 
@@ -118,3 +119,9 @@ null_ls.setup({
         null_ls.builtins.formatting.prettierd,
     },
 })
+--
+-- require('lspconfig').eslint.setup({
+--     enable = true,
+--     format = { enable = false },
+--     packageManager = "npm",
+-- })
