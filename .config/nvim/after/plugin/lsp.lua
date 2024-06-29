@@ -29,7 +29,9 @@ require('lspconfig').tsserver.setup({
         vim.keymap.set("n", "<leader>i",
             function() vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } }) end,
             opts)
-    end
+    end,
+
+    format = { enable = false }
 })
 
 lsp_zero.setup()
@@ -80,7 +82,7 @@ cmp.setup({
             name = 'html-css',
             option = {
                 max_count = {},
-                enable_on = { 'html', 'javascript', 'typescriptreact' },
+                enable_on = { 'html', 'javascript', 'typescriptreact', 'ejs' },
                 file_extensions = { "css", "sass", "less" }, -- set the local filetypes from which you want to derive classes
                 style_sheets = {
                     -- example of remote styles, only css no js for now
@@ -119,9 +121,15 @@ null_ls.setup({
         null_ls.builtins.formatting.prettierd,
     },
 })
---
--- require('lspconfig').eslint.setup({
---     enable = true,
---     format = { enable = false },
---     packageManager = "npm",
--- })
+
+require('lspconfig').eslint.setup({
+    on_attach = function(client, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "EslintFixAll",
+        })
+    end,
+    enable = true,
+    format = { enable = false },
+    packageManager = "npm",
+})
