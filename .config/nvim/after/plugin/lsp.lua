@@ -23,15 +23,25 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
-require('lspconfig').tsserver.setup({
+-- require('lspconfig').tsserver.setup({
+--     on_attach = function(client, bufnr)
+--         local opts = { buffer = bufnr, remap = false }
+--         vim.keymap.set("n", "<leader>i",
+--             function() vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } }) end,
+--             opts)
+--     end,
+--
+--     format = { enable = false }
+-- })
+
+require("typescript-tools").setup({
     on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, remap = false }
-        vim.keymap.set("n", "<leader>i",
-            function() vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } }) end,
-            opts)
+        vim.keymap.set("n", "<leader>i", function()
+            vim.cmd("TSToolsAddMissingImports")
+            vim.cmd("TSToolsOrganizeImports")
+        end)
     end,
-
-    format = { enable = false }
 })
 
 lsp_zero.setup()
@@ -64,7 +74,7 @@ local cmp_action = require('lsp-zero').cmp_action()
 local lspkind = require('lspkind')
 
 require('luasnip.loaders.from_vscode').lazy_load()
-
+require("vim-react-snippets").lazy_load()
 
 cmp.setup({
     preselect = 'none',

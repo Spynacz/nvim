@@ -12,7 +12,7 @@ require 'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
     -- list of language that will be disabled
-    disable = { },
+    disable = {},
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -22,15 +22,20 @@ require 'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
   incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = '<C-space>',
-        node_incremental = '<C-space>',
-        scope_incremental = '<C-s>',
-        node_decremental = '<C-S-space>',
+    enable = true,
+    keymaps = {
+      init_selection = '<C-space>',
+      node_incremental = '<C-space>',
+      scope_incremental = '<C-s>',
+      node_decremental = '<C-S-space>',
     }
   },
-  autotag = {
-      enable = true,
-  }
 }
+
+require('nvim-ts-autotag').setup({
+  opts = {
+    enable_close = true,          -- Auto close tags
+    enable_rename = true,         -- Auto rename pairs of tags
+    enable_close_on_slash = false -- Auto close on trailing </
+  },
+})

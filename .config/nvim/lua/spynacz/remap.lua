@@ -30,17 +30,19 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- use j and k with soft wrap like a sane person
 local opts = {noremap = true, silent = true, expr = true}
 local function vcountfunc(k)
-    return ((vim.v.count == 0) and ('g' .. k)) or k
+    return ((vim.v.count == 0) and ("g" .. k)) or k
 end
 
-vim.keymap.set('','j',function() return vcountfunc('j') end,opts)
-vim.keymap.set('','k',function() return vcountfunc('k') end,opts)
-vim.keymap.set('','<Down>',function() return vcountfunc('j') end,opts)
-vim.keymap.set('','<Up>',function() return vcountfunc('k') end,opts)
+vim.keymap.set("","j",function() return vcountfunc("j") end,opts)
+vim.keymap.set("","k",function() return vcountfunc("k") end,opts)
+vim.keymap.set("","<Down>",function() return vcountfunc("j") end,opts)
+vim.keymap.set("","<Up>",function() return vcountfunc("k") end,opts)
 
 vim.keymap.set("i", "<Down>", "<C-o>gj")
 vim.keymap.set("i", "<Up>", "<C-o>gk")
 
 -- Add empty lines before and after cursor line
-vim.keymap.set('n', 'gO', "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
-vim.keymap.set('n', 'go', "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
+vim.keymap.set("n", "gO", "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
+vim.keymap.set("n", "go", "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
+
+vim.keymap.set("i", "<C-BS>", "<C-w>")

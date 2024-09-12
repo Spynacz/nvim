@@ -1,60 +1,39 @@
 local wk = require("which-key")
 
-wk.register({
-    f = {
-        name = "File search",
-        g = "Git files",
-        s = "Grep search",
-        l = "Live grep",
-        b = "File browser",
-    },
-    o = "Find files",
-    g = {
-        name = "Git",
-        s = "Git status",
-        l = "Git log",
-    },
-    a = "Harpoon add file",
-    l = {
-        name = "LSP actions",
-        w = "List workspace symbols",
-        d = "Show diagnostics",
-        c = "Code action",
-        r = "Rename",
-        f = "Format file"
-    },
-    h = "Signature help",
-    u = "Show undotree",
-    p = {
-        name = "File explorer",
-        v = "File explorer",
-    },
-    Y = "Yank line to system clipboard",
-    s = "Replace word under cursor",
-    x = {
-        name = "Trouble",
-        x = "Trouble",
-        q = "Trouble quickfix"
-    },
-    ["<space>"] = {
-        name = "Swap split",
-        h = "Swap split left",
-        j = "Swap split down",
-        k = "Swap split up",
-        l = "Swap split right",
-    }
-}, { prefix = "<leader>", mode = "n" })
-
-wk.register({
-    gd = "Go to definition",
-    gD = "Go to declaration",
+wk.add({
+    { "<leader><space>",  group = "Swap split" },
+    { "<leader><space>h", desc = "Swap split left" },
+    { "<leader><space>j", desc = "Swap split down" },
+    { "<leader><space>k", desc = "Swap split up" },
+    { "<leader><space>l", desc = "Swap split right" },
+    { "<leader>Y",        desc = "Yank line to system clipboard" },
+    { "<leader>a",        desc = "Harpoon add file" },
+    { "<leader>f",        group = "File search" },
+    { "<leader>fb",       desc = "File browser" },
+    { "<leader>fg",       desc = "Git files" },
+    { "<leader>fl",       desc = "Live grep" },
+    { "<leader>fs",       desc = "Grep search" },
+    { "<leader>g",        group = "Git" },
+    { "<leader>gl",       desc = "Git log" },
+    { "<leader>gs",       desc = "Git status" },
+    { "<leader>h",        desc = "Signature help" },
+    { "<leader>l",        group = "LSP actions" },
+    { "<leader>lc",       desc = "Code action" },
+    { "<leader>ld",       desc = "Show diagnostics" },
+    { "<leader>lf",       desc = "Format file" },
+    { "<leader>lr",       desc = "Rename" },
+    { "<leader>lw",       desc = "List workspace symbols" },
+    { "<leader>o",        desc = "Find files" },
+    { "<leader>p",        group = "File explorer" },
+    { "<leader>pv",       desc = "File explorer" },
+    { "<leader>s",        desc = "Replace word under cursor" },
+    { "<leader>u",        desc = "Show undotree" },
+    { "<leader>v",        group = "Trouble" },
+    { "<leader>vq",       desc = "Trouble quickfix" },
+    { "<leader>vv",       desc = "Trouble" },
+    { "gD",               desc = "Go to declaration" },
+    { "gd",               desc = "Go to definition" },
+    { "<leader>p",        desc = "Paste over and keep clipboard",      mode = "x" },
+    { "<leader>d",        desc = "Delete to void register",            mode = { "n", "v" } },
+    { "<leader>y",        desc = "Yank selection to system clipboard", mode = { "n", "v" } },
 })
-
-wk.register({
-    p = "Paste over and keep clipboard"
-}, { prefix = "<leader>", mode = "x" })
-
-wk.register({
-    y = "Yank selection to system clipboard",
-    d = "Delete to void register"
-}, { prefix = "<leader>", mode = {"n", "v"} })

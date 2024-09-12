@@ -34,3 +34,6 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- vim.opt.autochdir = true
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
