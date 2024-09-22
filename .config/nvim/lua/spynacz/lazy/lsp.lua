@@ -85,7 +85,6 @@ return {
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
       { 'hrsh7th/cmp-nvim-lsp' },
-      { 'mfussenegger/nvim-jdtls' },
       { 'nvimtools/none-ls.nvim' },
       { 'pmizio/typescript-tools.nvim' },
     },
@@ -132,11 +131,35 @@ return {
         },
         handlers = {
           lsp_zero.default_setup,
+
           jdtls = lsp_zero.noop,
+
           lua_ls = function()
             local lua_opts = lsp_zero.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
           end,
+
+          eslint = function()
+            require('lspconfig').eslint.setup({
+              on_attach = function(client, bufnr)
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                  buffer = bufnr,
+                  command = "EslintFixAll",
+                })
+              end,
+              enable = true,
+              format = { enable = false },
+              packageManager = "npm",
+            })
+          end,
+
+          cssls = function()
+            require('lspconfig').cssls.setup({
+              init_options = {
+                provideFormatter = false,
+              }
+            })
+          end
         },
       })
 
@@ -176,24 +199,6 @@ return {
           null_ls.builtins.formatting.prettierd,
         },
       })
-
-      require('lspconfig').eslint.setup({
-        on_attach = function(client, bufnr)
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "EslintFixAll",
-          })
-        end,
-        enable = true,
-        format = { enable = false },
-        packageManager = "npm",
-      })
-
-      require('lspconfig').cssls.setup({
-        init_options = {
-          provideFormatter = false,
-        }
-      })
     end,
   },
 
@@ -205,7 +210,7 @@ return {
 
   {
     'norcalli/nvim-colorizer.lua',
-    cmd = { "ColorizerAttachToBuffer", "ColorizerReloadAllBuffers", "ColorizerToggle"}
+    cmd = { "ColorizerAttachToBuffer", "ColorizerReloadAllBuffers", "ColorizerToggle" }
   },
 
   {
