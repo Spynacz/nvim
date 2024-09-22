@@ -8,156 +8,15 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",     -- latest stable release
+    "--branch=stable", -- latest stable release
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.4',
-    dependencies = {
-      { 'nvim-lua/plenary.nvim' },
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build =
-        'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-      },
-    },
-  },
-
-  { 'nvim-telescope/telescope-file-browser.nvim' },
-
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {}     -- this is equalent to setup({}) function
-  },
-
-  { 'norcalli/nvim-colorizer.lua' },
-
-  {
-    'numToStr/Comment.nvim',
-    opts = {},
-    lazy = false,
-  },
-
-  { 'tpope/vim-fugitive' },
-
-  { 'ThePrimeagen/harpoon' },
-
-
-  {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      -- LSP Support
-      { 'neovim/nvim-lspconfig' },
-      { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim' },
-
-      -- Custom
-      { 'mfussenegger/nvim-jdtls' },
-      { 'nvimtools/none-ls.nvim' },
-      { "pmizio/typescript-tools.nvim" },
-
-      -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-nvim-lua' },
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-path' },
-      { 'saadparwaiz1/cmp_luasnip' },
-      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-      {
-        'Jezda1337/nvim-html-css',
-        dependencies = {
-          'nvim-treesitter/nvim-treesitter',
-          'nvim-lua/plenary.nvim'
-        },
-      },
-
-      -- Snippets
-      { 'L3MON4D3/LuaSnip' },
-      { 'rafamadriz/friendly-snippets' },
-      { "mlaursen/vim-react-snippets" },
-    }
-  },
-
-  { 'nvim-tree/nvim-web-devicons' },
-
-  {
-    'rose-pine/neovim',
-    name = 'rose-pine',
-  },
-
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000
-  },
-
-  {
-    'nvim-treesitter/nvim-treesitter',
-    build = function()
-      require('nvim-treesitter.install').update({ with_sync = true })()
-    end,
-    dependencies = {
-      { 'windwp/nvim-ts-autotag' }
-    }
-  },
-
-  {
-    'folke/trouble.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {}
-  },
-
-  { 'mbbill/undotree' },
-
-  {
-    'folke/which-key.nvim',
-    event = "VeryLazy",
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-    opts = {},
-  },
-
-  -- { 'roobert/hoversplit.nvim' },
-
-  {
-    'mrjones2014/smart-splits.nvim',
-    build = './kitty/install-kittens.bash'
-  },
-
-  { 'folke/zen-mode.nvim' },
-
-  { 'onsails/lspkind.nvim' },
-
-  {
-    'rcarriga/nvim-dap-ui',
-    dependencies = {
-      'mfussenegger/nvim-dap',
-      'ChristianChiarulli/neovim-codicons',
-      'nvim-neotest/nvim-nio'
-    }
-  },
-
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = "cd app && yarn install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
-  },
-
-  { "tpope/vim-surround" },
+  spec = "spynacz.lazy",
+  change_detection = { notify = false }
 })
 
 -- setup must be called before loading
@@ -182,3 +41,20 @@ autocmd('TextYankPost', {
 --augroup highlight_yank
 --au TextYankPost * silent! lua vim.highlight.on_yank()
 --augroup END
+
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+  callback = function()
+    vim.cmd([[Trouble qflist open]])
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufRead", {
+  callback = function(ev)
+    if vim.bo[ev.buf].buftype == "quickfix" then
+      vim.schedule(function()
+        vim.cmd([[cclose]])
+        vim.cmd([[Trouble qflist open]])
+      end)
+    end
+  end,
+})
