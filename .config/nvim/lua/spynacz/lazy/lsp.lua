@@ -32,6 +32,7 @@ return {
       local lspkind = require('lspkind')
       local cmp_action = require('lsp-zero').cmp_action()
       require('luasnip.loaders.from_vscode').lazy_load()
+      require('vim-react-snippets').lazy_load()
 
       cmp.setup({
         preselect = 'none',

@@ -1,7 +1,7 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
+    branch = 'master',
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
       {
@@ -20,7 +20,7 @@ return {
 
       require('telescope').setup({
         defaults = {
-          path_display = { shorten = 3 },
+          path_display = { filename_first = true },
           mappings = {
             i = {
               ["<C-j>"] = "move_selection_next",
