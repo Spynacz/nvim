@@ -42,12 +42,14 @@ autocmd('TextYankPost', {
 --au TextYankPost * silent! lua vim.highlight.on_yank()
 --augroup END
 
-vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-  callback = function()
-    vim.cmd([[Trouble qflist open]])
-  end,
-})
+-- Automatically Open Trouble Quickfix
+-- vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+--   callback = function()
+--     vim.cmd([[Trouble qflist open]])
+--   end,
+-- })
 
+-- Open Trouble Quickfix when the qf list opens
 vim.api.nvim_create_autocmd("BufRead", {
   callback = function(ev)
     if vim.bo[ev.buf].buftype == "quickfix" then

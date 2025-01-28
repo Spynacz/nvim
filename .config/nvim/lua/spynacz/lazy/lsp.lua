@@ -24,7 +24,8 @@ return {
       { 'saadparwaiz1/cmp_luasnip' },
       { 'hrsh7th/cmp-nvim-lsp-signature-help' },
       { 'Jezda1337/nvim-html-css' },
-      { "mlaursen/vim-react-snippets" },
+      { 'mlaursen/vim-react-snippets' },
+      { 'micangl/cmp-vimtex' },
     },
 
     config = function()
@@ -59,6 +60,8 @@ return {
             }
           },
         },
+        { name = 'vim-react-snippets' },
+        { name = 'vimtex' },
         formatting = {
           format = lspkind.cmp_format({
             mode = 'symbol',
@@ -158,6 +161,27 @@ return {
             require('lspconfig').cssls.setup({
               init_options = {
                 provideFormatter = false,
+              }
+            })
+          end,
+
+          texlab = function()
+            vim.keymap.set("n", "<leader>lv", "<cmd> TexlabForward <cr>")
+            require('lspconfig').texlab.setup({
+              settings = {
+                texlab = {
+                  build = {
+                    onSave = true
+                  },
+                  forwardSearch = {
+                    executable = "zathura",
+                    args = { "--synctex-forward", "%l:1:%f", "%p" }
+                  },
+                  formatterLineLength = 120,
+                  latexindent = {
+                    modifyLineBreaks = true
+                  }
+                }
               }
             })
           end
