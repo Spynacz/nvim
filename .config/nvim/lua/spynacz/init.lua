@@ -20,7 +20,7 @@ require("lazy").setup({
 })
 
 -- setup must be called before loading
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "everblush"
 require("spynacz.theme")
 
 local augroup = vim.api.nvim_create_augroup
