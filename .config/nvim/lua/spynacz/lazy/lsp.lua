@@ -51,7 +51,7 @@ return {
             name = 'html-css',
             option = {
               max_count = {},
-              enable_on = { 'html', 'javascript', 'typescriptreact', 'ejs' },
+              enable_on = { 'html', 'javascript', 'typescriptreact', 'ejs', 'vue' },
               file_extensions = { "css", "sass", "less" }, -- set the local filetypes from which you want to derive classes
               style_sheets = {
                 -- example of remote styles, only css no js for now
@@ -132,7 +132,8 @@ return {
           'clangd',
           'lua_ls',
           'jdtls',
-          'ts_ls',
+          'volar',
+          'pylsp',
         },
         handlers = {
           lsp_zero.default_setup,
@@ -185,7 +186,11 @@ return {
                 }
               }
             })
-          end
+          end,
+
+          ts_ls = function()
+            require("typescript-tools").setup {}
+          end,
         },
       })
 
@@ -205,7 +210,20 @@ return {
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
         end,
+
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "vue"
+        },
+
         settings = {
+          tsserver_plugins = {
+            -- Seemingly this is enough, no name, location or languages needed.
+            "@vue/typescript-plugin",
+          },
           -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
           complete_function_calls = true,
           include_completions_with_insert_text = true,
@@ -217,7 +235,6 @@ return {
       local null_ls = require('null-ls')
       null_ls.setup({
         sources = {
-          null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.clang_format.with({
             disabled_filetypes = { 'java' },
           }),

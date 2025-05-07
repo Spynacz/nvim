@@ -103,6 +103,14 @@ local function get_jdtls_paths()
       name = 'JavaSE-17',
       path = vim.fn.expand('/usr/lib/jvm/java-17-openjdk/'),
     },
+    {
+      name = 'JavaSE-21',
+      path = vim.fn.expand('/usr/lib/jvm/java-21-openjdk/'),
+    },
+    {
+      name = 'JavaSE-24',
+      path = vim.fn.expand('/usr/lib/jvm/java-24-openjdk/'),
+    },
   }
 
   cache_vars.paths = path
@@ -174,7 +182,7 @@ local function jdtls_setup(event)
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   local cmd = {
     -- 💀
-    'java',
+    '/usr/lib/jvm/java-24-openjdk/bin/java', -- normally just 'java', but has to be >=21
 
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
