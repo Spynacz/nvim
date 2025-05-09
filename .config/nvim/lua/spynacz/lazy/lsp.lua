@@ -238,6 +238,7 @@ return {
           null_ls.builtins.formatting.clang_format.with({
             disabled_filetypes = { 'java' },
           }),
+          null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.djlint,
           null_ls.builtins.formatting.prettierd,
         },
