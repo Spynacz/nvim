@@ -32,12 +32,14 @@ return {
 
         path.data_dir = vim.fn.stdpath('cache') .. '/nvim-jdtls'
 
-        local jdtls_install = require('mason-registry')
-            .get_package('jdtls')
-            :get_install_path()
+        -- local jdtls_install = require('mason-registry')
+        --     .get_package('jdtls')
+        --     :get_install_path()
+        local jdtls_install = "/home/mateusz/.local/share/nvim/mason/packages/jdtls"
 
         path.java_agent = '/opt/lombok/lombok.jar'
         path.launcher_jar = vim.fn.glob(jdtls_install .. '/plugins/org.eclipse.equinox.launcher_*.jar')
+
 
         if vim.fn.has('mac') == 1 then
           path.platform_config = jdtls_install .. '/config_mac'
@@ -56,9 +58,10 @@ return {
         ---
         -- Include java-test bundle if present
         ---
-        local java_test_path = require('mason-registry')
-            .get_package('java-test')
-            :get_install_path()
+        -- local java_test_path = require('mason-registry')
+        --     .get_package('java-test')
+        --     :get_install_path()
+        local java_test_path = "/home/mateusz/.local/share/nvim/mason/packages/java-test"
 
         local java_test_bundle = vim.split(
           vim.fn.glob(java_test_path .. '/extension/server/*.jar'),
@@ -72,9 +75,10 @@ return {
         ---
         -- Include java-debug-adapter bundle if present
         ---
-        local java_debug_path = require('mason-registry')
-            .get_package('java-debug-adapter')
-            :get_install_path()
+        -- local java_debug_path = require('mason-registry')
+        --     .get_package('java-debug-adapter')
+        --     :get_install_path()
+        local java_debug_path = "/home/mateusz/.local/share/nvim/mason/packages/java-debug-adapter"
 
         local java_debug_bundle = vim.split(
           vim.fn.glob(java_debug_path .. '/extension/server/com.microsoft.java.debug.plugin-*.jar'),
@@ -103,13 +107,13 @@ return {
             name = 'JavaSE-17',
             path = vim.fn.expand('/usr/lib/jvm/java-17-openjdk/'),
           },
-          -- {
-          --   name = 'JavaSE-21',
-          --   path = vim.fn.expand('/usr/lib/jvm/java-21-openjdk/'),
-          -- },
           {
-            name = 'JavaSE-24',
-            path = vim.fn.expand('/usr/lib/jvm/java-24-openjdk/'),
+            name = 'JavaSE-21',
+            path = vim.fn.expand('/usr/lib/jvm/java-21-openjdk/'),
+          },
+          {
+            name = 'JavaSE-25',
+            path = vim.fn.expand('/usr/lib/jvm/java-25-openjdk/'),
           },
         }
 
@@ -182,7 +186,7 @@ return {
         -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
         local cmd = {
           -- 💀
-          '/usr/lib/jvm/java-24-openjdk/bin/java', -- normally just 'java', but has to be >=21
+          '/usr/lib/jvm/java-21-openjdk/bin/java', -- normally just 'java', but has to be >=21
 
           '-Declipse.application=org.eclipse.jdt.ls.core.id1',
           '-Dosgi.bundles.defaultStartLevel=4',

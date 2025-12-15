@@ -33,7 +33,7 @@ return {
       local lspkind = require('lspkind')
       local cmp_action = require('lsp-zero').cmp_action()
       require('luasnip.loaders.from_vscode').lazy_load()
-      require('vim-react-snippets').lazy_load()
+      -- require('vim-react-snippets').lazy_load()
 
       cmp.setup({
         preselect = 'none',
@@ -132,8 +132,14 @@ return {
           'clangd',
           'lua_ls',
           'jdtls',
-          'volar',
           'pylsp',
+          'ts_ls',
+        },
+        automatic_enable = {
+          exclude = {
+            "ts_ls",
+            "jdtls"
+          }
         },
         handlers = {
           lsp_zero.default_setup,
@@ -186,10 +192,6 @@ return {
                 }
               }
             })
-          end,
-
-          ts_ls = function()
-            require("typescript-tools").setup {}
           end,
         },
       })
